@@ -85,7 +85,7 @@ func (c *ResourceOwnerPasswordCredentialsGrantHandler) PopulateTokenEndpointResp
 	}
 
 	var refresh, refreshSignature string
-	if len(c.Config.GetRefreshTokenScopes(ctx)) == 0 || requester.GetGrantedScopes().HasOneOf(c.Config.GetRefreshTokenScopes(ctx)...) {
+	if len(c.Config.GetRefreshTokenScopes(ctx)) == 0 || requester.GetRequestedScopes().HasOneOf(c.Config.GetRefreshTokenScopes(ctx)...) {
 		var err error
 		refresh, refreshSignature, err = c.RefreshTokenStrategy.GenerateRefreshToken(ctx, requester)
 		if err != nil {
